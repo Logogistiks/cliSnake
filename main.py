@@ -248,17 +248,17 @@ class Game:
 
     def displayGame(self):
         detailedrender = SETTINGS_rendermode[1] == SETTINGS_rendermode[0].index("detailed")
-        borderChars = {"vertical": "┃",
-                       "horizontal": "━",
-                       "junction": {"left": "┣",
-                                    "right": "┫",
-                                    "top": "┳",
-                                    "bot": "┻",
-                                    "center": "╋"},
-                       "left": {"top": "┏",
-                                "bot": "┗"},
-                       "right": {"top": "┓",
-                                 "bot": "┛"}}
+        borderChars = {"vertical": "║",
+                       "horizontal": "═",
+                       "junction": {"left": "╠",
+                                    "right": "╣",
+                                    "top": "╦",
+                                    "bot": "╩",
+                                    "center": "╬"},
+                       "left": {"top": "╔",
+                                "bot": "╚"},
+                       "right": {"top": "╗",
+                                 "bot": "╝"}}
         boardA = [] # normal
         boardwoA = [] # without Ansi
         renderwoA, renderA = self.renderGrid()[0].split("\n"), self.renderGrid()[1].split("\n")
@@ -309,7 +309,7 @@ def menu():
             print("Press Space to start Game".center(screenX))
             print("Press x to access Settings".center(screenX))
         if keyboard.is_pressed("space"):
-            break
+            return
         if keyboard.is_pressed("x"):
             settings()
             print(CLR)
@@ -358,9 +358,10 @@ def settings():
             return
 
 def start():
+    detailedrender = SETTINGS_rendermode[1] == SETTINGS_rendermode[0].index("detailed")
     hardClear()
     screenX, screenY = 0, 0
-    gameController = Game(20, 10)
+    gameController = Game(20, 10*{True: 2, False: 1}[detailedrender])
     gameController.spawnTreat()
     keyboard.add_hotkey("w", gameController.changeDir, args=("w"))
     keyboard.add_hotkey("up arrow", gameController.changeDir, args=("w"))
