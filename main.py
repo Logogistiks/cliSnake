@@ -1,11 +1,11 @@
-from shutil import get_terminal_size #120, 30
-from pyfiglet import Figlet
+import os
+import random
+import numpy
+from shutil import get_terminal_size
 from time import sleep
 import keyboard
-import random
 from copy import deepcopy
-import os
-import numpy
+from pyfiglet import Figlet
 
 def hardClear():
     os.system("clear" if os.name == "posix" else "cls")
