@@ -406,5 +406,3 @@ if __name__ == "__main__":
         score = start()
         gameover(score)
         print(CLR)
-
-# TODO : 2x2 pixel rendering, directional tailpiece rendering
