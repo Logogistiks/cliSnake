@@ -2,12 +2,12 @@
 This application brings the game Snake to the commandline, featuring both a minimalist mode and a detailed mode.
 
 <p float="left">
-  <img src="/images/screenshot_menu.png" width="450"/>
-  <img src="/images/screenshot_gameover.png" width="450" /> 
+  <img src="/images/screenshot_menu.png" width="400"/>
+  <img src="/images/screenshot_gameover.png" width="400" /> 
 </p>
 <p float="left">
-  <img src="/images/screenshot_game_simple.png" width="450" />
-  <img src="/images/screenshot_game_detailed.png" width="450" /> 
+  <img src="/images/screenshot_game_simple.png" width="400" />
+  <img src="/images/screenshot_game_detailed.png" width="400" /> 
 </p>
 
 
