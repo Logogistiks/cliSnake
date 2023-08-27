@@ -400,3 +400,6 @@ FodyWeavers.xsd
 # numpy data files
 *.npy
 *.npz
+
+# json files
+*.json
