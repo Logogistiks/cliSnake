@@ -27,7 +27,8 @@ class Game:
         self.renderCharsDetailed = {"0": "  ", "1": "██", "2": "██", "3": "██", "4": "██", "5": "▓▓"}
         self.dirmap = {"w": 1, "a": 2, "s": 3, "d": 4}
         self.invdirmap = {1: 3, 2: 4, 3: 1, 4: 2}
-        self.SETTINGS_rendermode, self.SETTINGS_savehs, self.SETTINGS_speedadj = numpy.load("settings.npy", allow_pickle=True)
+        with open("settings.json", "r") as f:
+            self.SETTINGS_rendermode, self.SETTINGS_savehs, self.SETTINGS_speedadj = json.load(f)
 
     def gridLimit(self):
         return [0, 0, self.sizeY-1, self.sizeX-1]

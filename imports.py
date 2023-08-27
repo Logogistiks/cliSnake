@@ -4,7 +4,7 @@ All modules needed
 
 import os
 import random # needed in logic
-import numpy
+import json
 from shutil import get_terminal_size # needed in gamestates/logic
 from time import sleep # needed in gamestates
 import pynput # needed in gamestates

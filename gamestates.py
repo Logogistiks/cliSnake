@@ -33,7 +33,8 @@ def menu():
                 update = True
 
 def settings():
-    SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj = numpy.load("settings.npy", allow_pickle=True)
+    with open("settings.json", "r") as f:
+        SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj = json.load(f)
     colorDict = {True: COLOR_SETTINGS_FOREGROUND+COLOR_SETTINGS_BACKGROUND, False: COLORRESET+COLORRESET}
     screenX, screenY = 0, 0
     selection = 0
@@ -74,11 +75,13 @@ def settings():
             if keynormal("c") in settingskeys:
                 while keynormal("c") in settingskeys:
                     pass
-                numpy.save("settings", [SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj])
+                with open("settings.json", "w") as f:
+                    f.write(json.dumps([SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj], indent=4))
                 return
 
 def start():
-    SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj = numpy.load("settings.npy", allow_pickle=True)
+    with open("settings.json", "r") as f:
+        SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj = json.load(f)
     detailedrender = SETTINGS_rendermode[1] == SETTINGS_rendermode[0].index("detailed")
     hardClear()
     screenX, screenY = 0, 0
@@ -116,31 +119,38 @@ def start():
             sleep(1/gameController.speed)
 
 def gameover(score):
-    SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj = numpy.load("settings.npy", allow_pickle=True)
+    with open("settings.json", "r") as f:
+        SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj = json.load(f)
     screenX, screenY = 0, 0
     logo = headline("Game Over!")
     print(CLR)
     if SETTINGS_savehs[1] == SETTINGS_savehs[0].index("yes"):
-        if os.path.exists("data.npy"):
-            hs = numpy.load("data.npy")[0]
+        if os.path.exists("data.json"):
+            with open("data.json", "r") as f:
+                hs = json.load(f)[0]
             if score > hs:
-                numpy.save("data", [score])
+                with open("data.json", "w") as f:
+                    f.write(json.dumps([score]))
         else:
-            numpy.save("data", [score])
+            with open("data.json", "w") as f:
+                f.write(json.dumps([score]))
     with gameoverlistener:
         while True:
             if get_terminal_size().columns != screenX or get_terminal_size().lines != screenY:
                 screenX, screenY = get_terminal_size()
                 centeredLogo = centerMultiline(logo, screenX)
                 highscore = score
-                if os.path.exists("data.npy"):
-                    read = numpy.load("data.npy")[0]
+                if os.path.exists("data.json"):
+                    with open("data.json", "r") as f:
+                        read = json.load(f)[0]
                     if score > read:
-                        numpy.save("data.npy", [score])
+                        with open("data.json", "w") as f:
+                            f.write(json.dumps([score]))
                     else:
                         highscore = read
                 else:
-                    numpy.save("data.npy", [score])
+                    with open("data.json", "w") as f:
+                        f.write(json.dumps([score]))
                 print(CMT + centeredLogo)
                 print(f"Score: {score}          Highscore: {highscore}".center(screenX))
                 print()
