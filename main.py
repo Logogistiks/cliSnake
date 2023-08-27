@@ -392,8 +392,17 @@ def gameover(score):
         if get_terminal_size().columns != screenX or get_terminal_size().lines != screenY:
             screenX, screenY = get_terminal_size()
             centeredLogo = centerMultiline(logo, screenX)
+            highscore = score
+            if os.path.exists("data.npy"):
+                read = numpy.load("data.npy")[0]
+                if score > read:
+                    numpy.save("data.npy", [score])
+                else:
+                    highscore = read
+            else:
+                numpy.save("data.npy", [score])
             print(CMT + centeredLogo)
-            print(f"Score: {score}".center(screenX))
+            print(f"Score: {score}          Highscore: {highscore}".center(screenX))
             print("Press q to exit".center(screenX))
             print("Press r to restart".center(screenX))
         if keyboard.is_pressed("q"):
