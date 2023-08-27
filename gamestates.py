@@ -67,7 +67,8 @@ def settings():
                 pass
             update = True
         if keyboard.is_pressed("c"):
-            numpy.save("settings", [SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj])
+            with open("settings.json", "w") as f:
+                f.write(json.dumps([SETTINGS_rendermode, SETTINGS_savehs, SETTINGS_speedadj], indent=4))
             return
 
 def start():
@@ -111,20 +112,24 @@ def gameover(score):
                 with open("data.json", "w") as f:
                     f.write(json.dumps([score]))
         else:
-            numpy.save("data", [score])
+            with open("data.json", "w") as f:
+                f.write(json.dumps([score]))
     while True:
         if get_terminal_size().columns != screenX or get_terminal_size().lines != screenY:
             screenX, screenY = get_terminal_size()
             centeredLogo = centerMultiline(logo, screenX)
             highscore = score
             if os.path.exists("data.npy"):
-                read = numpy.load("data.npy")[0]
+                with open("data.json", "r") as f:
+                    read = json.load(f)[0]
                 if score > read:
-                    numpy.save("data.npy", [score])
+                    with open("data.json", "w") as f:
+                        f.write(json.dumps([score]))
                 else:
                     highscore = read
             else:
-                numpy.save("data.npy", [score])
+                with open("data.json", "w") as f:
+                    f.write(json.dumps([score]))
             print(CMT + centeredLogo)
             print(f"Score: {score}          Highscore: {highscore}".center(screenX))
             print()
