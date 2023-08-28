@@ -27,14 +27,24 @@ cd cliSnake
 ```
 \
 3. Install requirements
-```
-pip install -r requirements.txt
-```
+* Windows:
+  ```
+  pip install -r requirements.txt
+  ```
+* Linux:
+  ```
+  sudo pip install -r requirements.txt
+  ```
 \
 4. Run game
-```
-python3 main.py
-```
+* Windows:
+  ```
+  python3 main.py
+  ```
+* Linux:
+  ```
+  sudo python3 main.py
+  ```
 
 ## How to play
 In the menu, press `space` to start. \
