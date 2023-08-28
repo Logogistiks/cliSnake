@@ -180,7 +180,7 @@ class Game:
             if i == 0:
                 newlineA += borderChars["vertical"] + COLORSCORE + str(self.score).center(max(5, len(str(self.score)))) + COLORRESET + borderChars["vertical"]
                 newlinewoA += borderChars["vertical"] + str(self.score).center(max(5, len(str(self.score)))) + borderChars["vertical"]
-            if i == 1:
+            elif i == 1:
                 newlineA += borderChars["junction"]["left"] + borderChars["horizontal"]*max(5, len(str(self.score))) + borderChars["right"]["bot"]
                 newlinewoA += borderChars["junction"]["left"] + borderChars["horizontal"]*max(5, len(str(self.score))) + borderChars["right"]["bot"]
             else:
