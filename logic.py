@@ -177,16 +177,15 @@ class Game:
         for i in range(len(renderA)):
             newlineA = borderChars["vertical"] + renderA[i]
             newlinewoA = borderChars["vertical"] + renderwoA[i]
-            match i:
-                case 0:
-                    newlineA += borderChars["vertical"] + COLORSCORE + str(self.score).center(max(5, len(str(self.score)))) + COLORRESET + borderChars["vertical"]
-                    newlinewoA += borderChars["vertical"] + str(self.score).center(max(5, len(str(self.score)))) + borderChars["vertical"]
-                case 1:
-                    newlineA += borderChars["junction"]["left"] + borderChars["horizontal"]*max(5, len(str(self.score))) + borderChars["right"]["bot"]
-                    newlinewoA += borderChars["junction"]["left"] + borderChars["horizontal"]*max(5, len(str(self.score))) + borderChars["right"]["bot"]
-                case _:
-                    newlineA += borderChars["vertical"]
-                    newlinewoA += borderChars["vertical"]
+            if i == 0:
+                newlineA += borderChars["vertical"] + COLORSCORE + str(self.score).center(max(5, len(str(self.score)))) + COLORRESET + borderChars["vertical"]
+                newlinewoA += borderChars["vertical"] + str(self.score).center(max(5, len(str(self.score)))) + borderChars["vertical"]
+            if i == 1:
+                newlineA += borderChars["junction"]["left"] + borderChars["horizontal"]*max(5, len(str(self.score))) + borderChars["right"]["bot"]
+                newlinewoA += borderChars["junction"]["left"] + borderChars["horizontal"]*max(5, len(str(self.score))) + borderChars["right"]["bot"]
+            else:
+                newlineA += borderChars["vertical"]
+                newlinewoA += borderChars["vertical"]
             boardA.append(newlineA)
             boardwoA.append(newlinewoA)
         newlineA = borderChars["left"]["top"] + borderChars["horizontal"]*(self.sizeX*({True: 2, False: 1}[detailedrender]))

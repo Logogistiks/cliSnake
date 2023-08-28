@@ -56,13 +56,12 @@ def settings():
                 pass
             update = True
         if keyboard.is_pressed("enter"):
-            match selection:
-                case 0:
-                    SETTINGS_rendermode = [SETTINGS_rendermode[0], 1-SETTINGS_rendermode[1]]
-                case 1:
-                    SETTINGS_savehs = [SETTINGS_savehs[0], 1-SETTINGS_savehs[1]]
-                case 2:
-                    SETTINGS_speedadj = [SETTINGS_savehs[0], 1-SETTINGS_speedadj[1]]
+            if selection == 0:
+                SETTINGS_rendermode = [SETTINGS_rendermode[0], 1-SETTINGS_rendermode[1]]
+            elif selection == 1:
+                SETTINGS_savehs = [SETTINGS_savehs[0], 1-SETTINGS_savehs[1]]
+            elif selection == 2:
+                SETTINGS_speedadj = [SETTINGS_savehs[0], 1-SETTINGS_speedadj[1]]
             while keyboard.is_pressed("enter"):
                 pass
             update = True
